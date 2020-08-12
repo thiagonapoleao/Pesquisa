@@ -75,30 +75,25 @@
 			myFunction()
 		};
 
-		function myFunction() {
-			alert("Input field lost focus.");
-			$("#formSearch").submit(function(e) {
-				e.preventDefault();
-
-				$.ajax({
-					url: 'search.php',
-					type: 'post',
-					dataType: 'json',
-					data: {
-						searchAdress: 1,
-						codigo: $("#codigo").val()
-					}
-				}).done(function(data) {
-					if (data) {
-						$("#nome").val(data.nome);
-					} else {
-						$("#nome").val("");
-					}
-				}).fail(function(data) {
-					console.log(data)
-				})
-			});
-		}
+		$("#codigo").blur(function() {
+			$.ajax({
+				url: 'search.php',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					searchAdress: 1,
+					codigo: $("#codigo").val()
+				}
+			}).done(function(data) {
+				if (data) {
+					$("#nome").val(data.nome);
+				} else {
+					$("#nome").val("");
+				}
+			}).fail(function(data) {
+				console.log(data)
+			})
+		});
 	</script>
 
 </body>
